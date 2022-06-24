@@ -1,0 +1,44 @@
+
+<div class="site">
+<div class="row">
+  <div class="col-md-12">
+    <h3>Product List</h3><br>
+   
+
+        <button (click)="add()" class="btn btn-primary btn-large" >Add Product</button>
+
+ 
+     <div class="table-responsive">
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Product Id </th>
+                      <th>Name</th>
+<th>Price</th>
+
+                      <th>Date </th>
+
+
+                      <th>Action </th>
+<th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <tbody>
+                    <tr *ngFor="let t of products_list index as i;" >
+
+                      <td >{{t.id}}</td>
+                      <td>{{t.name}}</td>
+    <td>{{t.original_price}}</td>
+
+
+                      <td>{{t.created_at}}</td>
+
+<td> <button (click)="edit(t.id)" class="btn btn-primary btn-sm" >Edit</button></td>
+<td> <button (click)="delete(t.id)" class="btn btn-danger btn-sm" >Delete</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div></div></div></div>

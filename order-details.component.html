@@ -1,0 +1,559 @@
+<ng-template #content4 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Address</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="editaddressForm" (ngSubmit)="updateaddressSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Mobile Number</label>
+        <input formControlName="mobile_number" placeholder="Mobile Number" name="mobile_number" class="form-control"
+          id="mobile_number">
+      </div>
+
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input formControlName="city" placeholder="City" name="description" class="form-control" id="city">
+      </div>
+
+      <div class="form-group">
+        <label for="pincode">Pincode</label>
+        <input formControlName="pincode" placeholder="Pincode" name="pincode" class="form-control" id="pincode">
+      </div>
+
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea rows="3" cols="4" formControlName="address" placeholder="Enter Address..." name="address"
+          class="form-control" id="address"></textarea>
+      </div>
+
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-primary">Submit</button>
+
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="editproductForm" (ngSubmit)="updateproductSubmit()">
+      <div class="form-group">
+        <label for="product_selling_price">Selling Price</label>
+        <input formControlName="product_selling_price" placeholder="Selling Price" name="product_selling_price"
+          class="form-control" id="product_selling_price">
+      </div>
+
+      <div class="form-group">
+        <label for="quanity">Quantity</label>
+        <input type="number" formControlName="quanity" placeholder="Quantity" name="quanity" class="form-control"
+          id="quanity">
+      </div>
+
+
+
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-primary">Submit</button>
+
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Product List</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-row">
+      <div class="col-md-6" *ngFor="let m of product_listshow index as i;">
+
+
+
+        <mat-card class="example-card">
+          <mat-card-title>{{m.name}}</mat-card-title>
+          <mat-card-subtitle>${{m.sell_price}}</mat-card-subtitle>
+          <mat-card-content>
+
+            <figure class="figure" style="padding:30px;">
+              <img src="{{m.cover}}" class="img-thumbnail" width="200px" height="200px">
+
+            </figure>
+            <!-- <img src="{{t.image}}" /> -->
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="onproductSubmit2(m.id)" class="btn btn-outline-primary btn-sm">Select</button>
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+
+<div class="row">
+  <div class="col-md-10">
+
+    <h1>
+      #{{order_id}} {{product_name}}
+    </h1>
+    Status {{order_status}} <br>
+
+    {{created_at}}
+  </div>
+
+  <div class="col-md-2 text-right">
+
+    <button class="btn btn-secondary  btn-lg float-end" [matMenuTriggerFor]="menu">Action menu</button>
+    <mat-menu #menu="matMenu">
+
+
+      <button mat-menu-item>Processing</button>
+
+      <button mat-menu-item>Pending Payment</button>
+
+      <button mat-menu-item>Completed</button>
+
+      <button mat-menu-item>Refunded</button>
+      <button mat-menu-item>Cancelled</button>
+
+      <button mat-menu-item>On-hold</button>
+    </mat-menu>
+
+  </div>
+</div>
+
+
+
+<mat-tab-group>
+
+ 
+  
+
+
+  <mat-tab label="Product Details">
+
+
+    <mat-accordion>
+      <mat-icon (click)="open(content)">add</mat-icon>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+        *ngFor="let t of product_list index as i;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Product ID # {{t.id}}
+
+
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <!--  <div class="float-right">
+
+    <mat-icon (click)="open3(content3,t.id)">edit</mat-icon>
+     <mat-icon (click)="delete_part_product(t.id)">delete</mat-icon>
+</div> -->
+        <div class="float-right">
+
+        
+          <mat-icon (click)="open1(content1,t.id)">edit</mat-icon>
+          <mat-icon (click)="delete_product(t.id)">delete</mat-icon>
+
+        </div>
+    
+        <table class="table  text-white">
+          <tr>
+            <td>
+              Decription
+            </td>
+            <td>Amount
+
+            </td>
+            <td>Quantity
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              {{t.name}}
+            </td>
+            <td> {{t.sell_price}} INR
+            </td>
+
+            <td> {{t.quanity}}
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Selling Price
+            </td>
+            <td> {{t.product_selling_price}} INR
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+              Total
+            </td>
+            <td>{{t.sell_price}} INR
+
+            </td>
+            <td></td>
+          </tr>
+
+        </table>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+
+  </mat-tab>
+
+
+
+  <mat-tab label=" Customer Details">
+
+    <mat-accordion>
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            Adddress
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="float-right">
+
+          <mat-icon (click)="open4(content4,address_id)">edit</mat-icon>
+          <mat-icon (click)="delete_address(address_id)">delete</mat-icon>
+        </div>
+
+        <table class="table  text-white">
+          <tr>
+
+            <td>
+              Name
+            </td>
+            <td>
+              {{name}}
+
+            </td>
+          </tr>
+          <tr>
+
+            <td>
+              Mobile Number
+            </td>
+            <td>
+              {{mobile_number}}
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              City
+
+            </td>
+            <td>{{city}}
+
+            </td>
+          </tr>
+
+          <tr>
+
+            <td>
+              Pincode
+            </td>
+            <td> {{pincode}}
+
+            </td>
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Address
+            </td>
+            <td> {{address}}
+
+            </td>
+          </tr>
+
+        </table>
+
+
+
+
+      </mat-expansion-panel>
+
+
+    </mat-accordion>
+
+  </mat-tab>
+
+  <mat-tab label="Payment Details">
+    <mat-accordion>
+
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Payment Details
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <br>
+        <table class="table  text-white">
+
+          <tr>
+            <td>
+              Payment Method
+            </td>
+            <td> {{payment_method}}
+
+            </td>
+          </tr>
+         
+       
+          <tr>
+            <td>
+              Payable Amount
+            </td>
+            <td> {{total}} INR
+
+            </td>
+          </tr>
+        </table>
+
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-tab>
+
+  <mat-tab label="Shipping Details">
+
+
+    <mat-accordion>
+
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Shipping Details
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+
+        <form [formGroup]="addshippingForm" (ngSubmit)="submitShipping()">
+
+
+
+          <div class="form-group">
+            <label for="descriptions"> Shipping Details </label>
+            <textarea rows="3" cols="4" formControlName="shipping_details" placeholder="Shipping Details"
+              name="shipping_details" class="form-control" id="shipping_details"></textarea>
+          </div>
+
+
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary btn-sm">Submit</button>
+          </div>
+
+
+
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            Shipping Details List
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="table-responsive">
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                 
+                <th> Shipping Details </th>
+
+                <th>Date </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of order_shipping_list index as i;">
+
+                
+                <td>{{t.shipping_details}}</td>
+
+                <td>{{t.created_at}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            Order List
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="table-responsive">
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> ID </th>
+                <th>Product</th>
+
+
+                <th> Total </th>
+                <th>Status </th>
+                <th>Date </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of customer_order_list index as i;">
+
+                <td>{{t.id}}</td>
+                <td>{{t.name}}</td>
+
+                <td>{{t.total}}</td>
+                <td>{{t.order_status}}</td>
+
+                <td>{{t.created_at}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </mat-tab>
+
+  <mat-tab label="Order Note">
+
+
+    <mat-accordion>
+
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Order Note
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+
+        <form [formGroup]="addordernoteForm" (ngSubmit)="submitOrdernote()">
+
+
+
+          <div class="form-group">
+            <label for="descriptions"> Order Note</label>
+            <textarea rows="3" cols="4" formControlName="order_note" placeholder="Order Note" name="order_note"
+              class="form-control" id="order_note"></textarea>
+          </div>
+
+
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary btn-sm">Submit</button>
+          </div>
+
+
+
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            Order Note List
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="table-responsive">
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> ID </th>
+                <th>Note</th>
+                <th>Date </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of order_note_list index as i;">
+
+                <td>{{t.id}}</td>
+                <td>{{t.order_note}}</td>
+
+
+                <td>{{t.created_at}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </mat-tab>
+</mat-tab-group>
