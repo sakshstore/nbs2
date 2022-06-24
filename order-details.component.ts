@@ -180,7 +180,6 @@ export class OrderDetailsComponent implements OnInit {
     });
 
     this.editproductForm = this.formBuilder.group({
-      id:[''],
       product_selling_price: [''],
       quanity: [''],
 
@@ -196,24 +195,8 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
-  updateproductSubmit(){
- this.jobService.update_orderproduct(this.editproductForm.value)
-      .subscribe(
-        data => {
-          console.log(data);
+  updateproductSubmit() {
 
-          this._snackBar.open(data['message'], "Close", {
-            duration: 2000,
-
-            verticalPosition: 'top',
-            horizontalPosition: 'center'
-          });
-          // this.getpart_product_list();
-          this.modalService.dismissAll(this);
-        },
-        error => {
-          alert(error);
-        });
   }
 
   open(content) {
